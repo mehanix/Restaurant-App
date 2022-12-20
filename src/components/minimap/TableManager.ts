@@ -42,6 +42,11 @@ export class TableManager {
         this.currentlySelectedTablesCapacity() <=
         0
     ) {
+      alert(
+        "Ai selectat suficiente mese pentru o rezervare cu " +
+          reservationManager.selectedNumberOfPeople +
+          " oameni!"
+      );
       return;
     }
 
