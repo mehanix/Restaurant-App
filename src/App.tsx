@@ -1,6 +1,7 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ReservationPage from "./pages/ReservationPage";
+import { ChakraProvider } from "@chakra-ui/react";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -13,7 +14,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ChakraProvider>
+      <RouterProvider router={router} />;
+    </ChakraProvider>
+  );
 }
 
 export default App;

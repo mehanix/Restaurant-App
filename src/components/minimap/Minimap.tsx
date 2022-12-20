@@ -1,12 +1,13 @@
 import p5 from "p5";
 import { useEffect, useRef } from "react";
 import { TableListAPIObject } from "../../api/APIInterfaces";
+import { ReservationDataManager } from "./ReservationDataManager";
 import { Table, TableStatus } from "./Table";
 import { TableManager } from "./TableManager";
 
 let myP5: p5;
 export let tableManager: TableManager;
-
+export let reservationManager: ReservationDataManager;
 const DemoTables: TableListAPIObject = {
   tables: [
     {
@@ -60,6 +61,7 @@ export const Minimap = () => {
     s.setup = () => {
       s.createCanvas(800, 800);
       tableManager = new TableManager(DemoTables);
+      reservationManager = new ReservationDataManager();
     };
 
     // Draw loop
