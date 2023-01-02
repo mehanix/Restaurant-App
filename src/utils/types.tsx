@@ -1,8 +1,8 @@
 export type RestaurantType = {
   id: number;
   name: string;
-  desccription: string;
-  location: string;
+  description: string;
+  address: string;
   presentationImageUrl: string;
   score: number;
   reviews: any[];
@@ -13,6 +13,7 @@ export type ReviewType = {
   username: string;
   postedOn: Date;
   score: number;
+  title: string;
   message: string;
   relevance: number;
 };

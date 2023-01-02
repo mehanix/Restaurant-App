@@ -16,7 +16,7 @@ const RestaurantListPage = () => {
 
   const getAndSetRequests = async () => {
     setIsLoading(true);
-    toast.loading("Getting things ready...");
+    toast.info("Getting things ready...", { autoClose: 2000 });
     const result = await getRestaurantsFromRequest();
     if (Boolean(result) && Array.isArray(result)) {
       setRestaurants(result);
@@ -40,7 +40,7 @@ const RestaurantListPage = () => {
 
 const RestaurantListPageWrapper = () => {
   const pageTitle = "Restaurant List";
-  console.log("LOADED")
+  console.log("LOADED");
   return (
     <>
       <PageTitle pageTitle={pageTitle} />

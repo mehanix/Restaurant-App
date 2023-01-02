@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.dark-jungle-green {
+  background-color: #0C1713;
+  color: white;
+}
+
+.wine {
+  background-color: #6A2E35;
+  color: white;
+}
+
+.coral {
+  background-color: #EF6F6C;
+  color: white;
+}
+
+.wheat {
+  background-color: wheat;
+  color: black;
+}
