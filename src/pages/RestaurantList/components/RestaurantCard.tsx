@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import IconProvider from "../../../assets/icons/IconProvider";
 import { RestaurantType } from "../../../utils/types";
-import { ScoreComponent } from "./ScoreComponent";
+import { ScoreComponent } from "../../../components/ScoreComponent";
 
 const RestaurantCard = ({ restaurant }: { restaurant: RestaurantType }) => {
   return (
@@ -14,7 +14,14 @@ const RestaurantCard = ({ restaurant }: { restaurant: RestaurantType }) => {
           alt={`restaurant ${restaurant.id} presentation`}
         />
       </div>
-      <div style={{ display: "flex", flexFlow: "column", width: "80%" }}>
+      <div
+        style={{
+          display: "flex",
+          flexFlow: "column",
+          width: "80%",
+          height: "200px",
+        }}
+      >
         <div
           style={{
             fontSize: "24px",
@@ -42,7 +49,9 @@ const RestaurantCard = ({ restaurant }: { restaurant: RestaurantType }) => {
           <IconProvider iconName="pin-map-fill" className="me-1" />
           <span>{restaurant.address}</span>
         </div>
-        <div className="mh-80">{restaurant.description}</div>
+        <div className="mh-80" style={{ textAlign: "justify", overflow: 'hidden' }}>
+          {restaurant.description}
+        </div>
         <Link
           className="btn btn-info"
           style={{ marginTop: "auto", width: "150px" }}

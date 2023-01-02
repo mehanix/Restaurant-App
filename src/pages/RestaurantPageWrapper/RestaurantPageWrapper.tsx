@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import PageTitle from "../../components/PageTitle";
-import { restaurants } from "../../utils/dummyData";
+import { emptyRestaurant, restaurants } from "../../utils/dummyData";
 import { RestaurantType } from "../../utils/types";
+import RestaurantDetails from "./components/RestaurantDetails";
+import RestaurantReviews from "./components/RestaurantReviews";
 
 const getRestaurantFromRequestById = async (id: number) => {
   return (
@@ -13,13 +15,18 @@ const getRestaurantFromRequestById = async (id: number) => {
   );
 };
 
-const RestaurantPage = ({}: {}) => {
-  return <></>;
+const RestaurantPage = ({ restaurant }: { restaurant: RestaurantType }) => {
+  return (
+    <div style={{ display: "flex" }}>
+      <RestaurantDetails restaurant={restaurant} />
+      <RestaurantReviews restaurant={restaurant} />
+    </div>
+  );
 };
 
 const RestaurantPageWrapper = () => {
   const { id } = useParams<any>();
-  const [restaurant, setRestaurant] = useState<RestaurantType | null>(null);
+  const [restaurant, setRestaurant] = useState<RestaurantType>(emptyRestaurant);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getAndSetRestaurantRequest = async () => {
@@ -27,7 +34,7 @@ const RestaurantPageWrapper = () => {
     toast.info("Getting things ready...", { autoClose: 2000 });
     const result = await getRestaurantFromRequestById(parseInt(id || "0"));
     if (Boolean(result?.id)) {
-      setRestaurant(result);
+      setRestaurant(result || emptyRestaurant);
       toast.success("Restaurants successfully loaded!");
     } else {
       toast.error("Seems like something broke!");
@@ -39,7 +46,7 @@ const RestaurantPageWrapper = () => {
     getAndSetRestaurantRequest();
   }, []);
 
-  if (!Boolean(restaurant) || isLoading) {
+  if (!Boolean(restaurant.id) || isLoading) {
     return <LoadingIndicator />;
   }
 
@@ -48,7 +55,7 @@ const RestaurantPageWrapper = () => {
   return (
     <>
       <PageTitle pageTitle={pageTitle} />
-      <RestaurantPage />
+      <RestaurantPage restaurant={restaurant} />
     </>
   );
 };

@@ -7,7 +7,7 @@ const RestaurantList = ({ restaurants }: { restaurants: RestaurantType[] }) => {
   const [searchBy, setSearchBy] = useState<string>("");
   const filteredRestaurants: RestaurantType[] = Boolean(searchBy)
     ? restaurants.filter((restaurant: RestaurantType) =>
-        restaurant.name.includes(searchBy)
+        restaurant.name.toLowerCase().includes(searchBy.toLowerCase())
       )
     : restaurants;
 

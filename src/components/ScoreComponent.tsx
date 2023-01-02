@@ -1,5 +1,5 @@
-import IconProvider from "../../../assets/icons/IconProvider";
-import { specialRound } from "../../../utils/float";
+import IconProvider from "../assets/icons/IconProvider";
+import { specialRound } from "../utils/float";
 
 const ratingIndices: number[] = Array.from(Array(5).keys());
 
