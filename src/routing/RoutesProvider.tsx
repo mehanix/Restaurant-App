@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import ReservationPageWrapper from "../pages/ReservationPage/ReservationPageWrapper";
 import RestaurantListPageWrapper from "../pages/RestaurantList/RestaurantListPageWrapper";
 import RestaurantPageWrapper from "../pages/RestaurantPageWrapper/RestaurantPageWrapper";
 
@@ -24,6 +25,14 @@ const RoutesProvider = () => {
         element={
           <PrivateRoute>
             <RestaurantPageWrapper />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/restaurant/:id/make-reservation"
+        element={
+          <PrivateRoute>
+            <ReservationPageWrapper />
           </PrivateRoute>
         }
       />
