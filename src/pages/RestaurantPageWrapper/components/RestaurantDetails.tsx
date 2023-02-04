@@ -35,7 +35,7 @@ const RestaurantDetails = ({ restaurant }: { restaurant: RestaurantType }) => {
       <Link
         className="btn btn-info"
         style={{ marginTop: "auto", width: "250px" }}
-        to={`../restaurant/${restaurant.id}`}
+        to={`../restaurant/${restaurant.id}/make-reservation`}
       >
         Make a reservation
       </Link>
