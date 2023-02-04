@@ -1,4 +1,5 @@
-export interface TableAPIObject {
+// cum tin obiectele in minimap
+export interface TableObject {
   x: number;
   y: number;
   numberOfSeats: number;
@@ -6,6 +7,11 @@ export interface TableAPIObject {
   status: number;
 }
 
-export interface TableListAPIObject {
-  tables: TableAPIObject[];
+// forma json-urilor din api
+export interface GetRequestTableObject {
+  id: number;
+  capacity: 4;
+  number: string;
+  graphicX: number;
+  graphicY: number;
 }

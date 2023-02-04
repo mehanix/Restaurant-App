@@ -1,15 +1,15 @@
-import { TableListAPIObject } from "./APIInterfaces";
+import { TableObject } from "./APIInterfaces";
 import { reservationManager } from "./Minimap";
 import { Table, TableStatus } from "./Table";
 
 export class TableManager {
-  tables: Table[];
-  tableSelection: Table[];
+  static tables: Table[];
+  static tableSelection: Table[];
 
-  constructor(apiData: TableListAPIObject) {
-    this.tables = [];
-    this.tableSelection = [];
-    for (let tableData of apiData.tables) {
+  constructor(apiData: TableObject[]) {
+    TableManager.tables = [];
+    TableManager.tableSelection = [];
+    for (let tableData of apiData) {
       let newTable = new Table({
         x: tableData.x,
         y: tableData.y,
@@ -17,17 +17,17 @@ export class TableManager {
         id: tableData.id,
         status: tableData.status,
       });
-      this.tables.push(newTable);
+      TableManager.tables.push(newTable);
     }
   }
 
   displayTables() {
-    for (let table of this.tables) {
+    for (let table of TableManager.tables) {
       table.display();
     }
   }
   checkIfClicked() {
-    for (let table of this.tables) {
+    for (let table of TableManager.tables) {
       table.checkIfClicked();
     }
   }
@@ -57,7 +57,7 @@ export class TableManager {
 
   findTable(id: number): Table | null {
     let foundTable = null;
-    for (let table of this.tables) {
+    for (let table of TableManager.tables) {
       if (table.id == id) {
         foundTable = table;
       }
@@ -67,17 +67,17 @@ export class TableManager {
 
   computeTableSelection() {
     let tableSelection = [];
-    for (let table of this.tables) {
+    for (let table of TableManager.tables) {
       if (table.status == TableStatus.SELECTED) {
         tableSelection.push(table);
       }
     }
-    this.tableSelection = tableSelection;
+    TableManager.tableSelection = tableSelection;
   }
 
   currentlySelectedTablesCapacity() {
     let sum = 0;
-    for (let table of this.tableSelection) {
+    for (let table of TableManager.tableSelection) {
       sum += table.numberOfSeats;
     }
     return sum;
