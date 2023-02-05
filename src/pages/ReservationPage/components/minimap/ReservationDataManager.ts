@@ -59,13 +59,22 @@ export class ReservationDataManager {
     this.active = value;
   }
 
-  submit() {
-    console.log(
-      this.selectedNumberOfPeople,
-      this.reservationDate,
-      this.reservationTime,
-      this.restaurantId
-    );
-    console.log(TableManager.tableSelection);
+  async submit() {
+    const tableIds = TableManager.tableSelection.map((table) => table.id);
+
+    let res = await axios.post(`${API_URL}/bookings/1/1`, {
+      date: this.reservationDate,
+      hour: this.reservationTime,
+      noOfPersons: this.selectedNumberOfPeople,
+      bookedTablesIds: tableIds,
+    });
+    console.log(res);
+    // console.log(
+    //   this.selectedNumberOfPeople,
+    //   this.reservationDate,
+    //   this.reservationTime,
+    //   this.restaurantId
+    // );
+    // console.log(TableManager.tableSelection);
   }
 }
