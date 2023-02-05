@@ -62,13 +62,24 @@ export class ReservationDataManager {
   async submit() {
     const tableIds = TableManager.tableSelection.map((table) => table.id);
 
-    let res = await axios.post(`${API_URL}/bookings/1/1`, {
-      date: this.reservationDate,
-      hour: this.reservationTime,
-      noOfPersons: this.selectedNumberOfPeople,
-      bookedTablesIds: tableIds,
-    });
-    console.log(res);
+    try {
+      let res = await axios.post(`${API_URL}/bookings/2/1`, {
+        date: this.reservationDate,
+        hour: this.reservationTime,
+        noOfPersons: this.selectedNumberOfPeople,
+        bookedTablesIds: tableIds,
+      });
+
+      if (res.status == 200) {
+        alert(
+          "Reservation Sent! Please confirm by clicking the link we sent to your e-mail address."
+        );
+      }
+      window.location.href = "/";
+    } catch (err) {
+      console.log(err);
+    }
+
     // console.log(
     //   this.selectedNumberOfPeople,
     //   this.reservationDate,
