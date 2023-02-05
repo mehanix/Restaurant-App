@@ -1,9 +1,11 @@
 import { Button, Heading, HStack, Input, Select } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Minimap, reservationManager } from "./components/minimap/Minimap";
 
 const Page = () => {
-  const timesList = [...Array(10).keys()].map((x: number) => {
-    return <option value={(x + 8).toString()}>{x + 8}:00</option>;
+  const timesList = [...Array(12).keys()].map((x: number) => {
+    return <option value={`${x + 10}:00`}>{x + 10}:00</option>;
   });
 
   return (
