@@ -5,9 +5,10 @@ import ReservationPageWrapper from "../pages/ReservationPage/ReservationPageWrap
 import RestaurantListPageWrapper from "../pages/RestaurantList/RestaurantListPageWrapper";
 import RestaurantPageWrapper from "../pages/RestaurantPageWrapper/RestaurantPageWrapper";
 import { UserContext } from "../utils/providers/UserContextProvider";
+import { UserReservationsWrapper } from "../pages/UserOverview/UserReservationsWrapper";
 
 function PrivateRoute({ children }: { children: any }) {
-  const {isLogged} = useContext<any>(UserContext)
+  const { isLogged } = useContext<any>(UserContext);
   return isLogged ? children : <Navigate to="/login" />;
 }
 
@@ -29,6 +30,14 @@ const RoutesProvider = () => {
         element={
           <PrivateRoute>
             <RestaurantPageWrapper />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/reservations"
+        element={
+          <PrivateRoute>
+            <UserReservationsWrapper />
           </PrivateRoute>
         }
       />
