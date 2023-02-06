@@ -67,8 +67,17 @@ export class ReservationDataManager {
       hour: this.reservationTime,
       noOfPersons: this.selectedNumberOfPeople,
       bookedTablesIds: tableIds,
+      notificationType: "email",
     });
     console.log(res);
+
+    if (res.status == 201) {
+      alert(
+        "Rezervare efectuata cu succes! Pentru a o confirma, va rugam sa accesati link-ul de pe e-mail."
+      );
+      window.location.href = "/";
+    }
+
     // console.log(
     //   this.selectedNumberOfPeople,
     //   this.reservationDate,
