@@ -8,6 +8,7 @@ export class ReservationDataManager {
   reservationDate: string;
   reservationTime: string;
   restaurantId: string;
+  userId: string;
   active: boolean;
   constructor() {
     this.selectedNumberOfPeople = 0;
@@ -15,6 +16,7 @@ export class ReservationDataManager {
     this.reservationDate = "";
     this.reservationTime = "";
     this.restaurantId = "";
+    this.userId = "";
   }
 
   setRestaurantId(id: any) {
@@ -24,6 +26,8 @@ export class ReservationDataManager {
     let noOfPeople = myP5.select("#noOfPeople");
     let reservationTime = myP5.select("#reservationTime");
     let reservationDate = myP5.select("#reservationDate");
+    let restaurantId = myP5.select("#restaurantId");
+    let userId = myP5.select("#userId");
 
     if (noOfPeople) {
       this.selectedNumberOfPeople = noOfPeople.value() as number;
@@ -34,11 +38,20 @@ export class ReservationDataManager {
     if (reservationTime) {
       this.reservationTime = reservationTime.value() as string;
     }
+    if (restaurantId) {
+      this.restaurantId = restaurantId.value() as string;
+    }
+    if (userId) {
+      this.userId = userId.value() as string;
+    }
 
+    console.log(restaurantId, userId);
     if (
       this.selectedNumberOfPeople == 0 ||
       this.reservationDate == "" ||
-      this.reservationTime == ""
+      this.reservationTime == "" ||
+      this.restaurantId == "" ||
+      this.userId == ""
     ) {
       alert("Trebuie selectate toate cele 3 campuri!");
       return;
@@ -50,7 +63,7 @@ export class ReservationDataManager {
     );
     console.log(
       API_URL +
-        `/restaurants/1/tables/availability?date=${this.reservationDate}&time=${this.reservationTime}`
+        `/restaurants/${this.restaurantId}/tables/availability?date=${this.reservationDate}&time=${this.reservationTime}`
     );
 
     this.setActive(true);
@@ -62,13 +75,25 @@ export class ReservationDataManager {
   async submit() {
     const tableIds = TableManager.tableSelection.map((table) => table.id);
 
-    let res = await axios.post(`${API_URL}/bookings/1/1`, {
-      date: this.reservationDate,
-      hour: this.reservationTime,
-      noOfPersons: this.selectedNumberOfPeople,
-      bookedTablesIds: tableIds,
-    });
+    let res = await axios.post(
+      `${API_URL}/bookings/${this.userId}/${this.restaurantId}`,
+      {
+        date: this.reservationDate,
+        hour: this.reservationTime,
+        noOfPersons: this.selectedNumberOfPeople,
+        bookedTablesIds: tableIds,
+        notificationType: "email",
+      }
+    );
     console.log(res);
+
+    if (res.status == 201) {
+      alert(
+        "Rezervare efectuata cu succes! Pentru a o confirma, va rugam sa accesati link-ul de pe e-mail."
+      );
+      window.location.href = "/";
+    }
+
     // console.log(
     //   this.selectedNumberOfPeople,
     //   this.reservationDate,

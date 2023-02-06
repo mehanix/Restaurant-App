@@ -1,15 +1,22 @@
 import { Button, Heading, HStack, Input, Select } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../../utils/providers/UserContextProvider";
 import { Minimap, reservationManager } from "./components/minimap/Minimap";
 
 const Page = () => {
+  const { id } = useParams();
+  const user = useContext(UserContext) as any;
+
   const timesList = [...Array(12).keys()].map((x: number) => {
     return <option value={`${x + 10}:00`}>{x + 10}:00</option>;
   });
 
   return (
     <>
+      <input hidden id="restaurantId" value={id} />
+
+      <input hidden id="userId" value={user.user.id} />
       <Heading mt="10px" size="xl">
         Make a reservation
       </Heading>
