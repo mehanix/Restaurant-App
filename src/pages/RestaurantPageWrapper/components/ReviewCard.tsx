@@ -16,7 +16,11 @@ const ReviewCard = ({ review }: { review: ReviewType }) => {
     >
       <span className="fw-bold">{review.username}</span>
       <span className="fw-light">{" - " + review.postedOn.toString()}</span>
-      <ScoreComponent score={review.score} />
+      <ScoreComponent
+        style={{ display: "flex", alignItems: "center" }}
+        className="me-2"
+        score={review.score}
+      />
       <div className="fw-bold">{review.title}</div>
       <div>{review.message}</div>
       <div className="pt-2" style={{ display: "flex", alignItems: "center" }}>

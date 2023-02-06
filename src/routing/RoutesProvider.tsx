@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import Login from "../pages/Login/Login";
 import ReservationPageWrapper from "../pages/ReservationPage/ReservationPageWrapper";
 import RestaurantListPageWrapper from "../pages/RestaurantList/RestaurantListPageWrapper";
 import RestaurantPageWrapper from "../pages/RestaurantPageWrapper/RestaurantPageWrapper";
+import { UserContext } from "../utils/providers/UserContextProvider";
 
 function PrivateRoute({ children }: { children: any }) {
-  const auth = true; // to be replaced by auth from user context provider
-  return auth ? children : <Navigate to="/login" />;
+  const {isLogged} = useContext<any>(UserContext)
+  return isLogged ? children : <Navigate to="/login" />;
 }
 
 const RoutesProvider = () => {
   return (
     <Routes>
+      <Route path="/login" element={<Login />} />
+
       <Route
         path="/"
         element={
