@@ -10,7 +10,7 @@ const RestaurantCard = ({ restaurant }: { restaurant: RestaurantType }) => {
       <div className="me-3" style={{ width: "200px", height: "200px" }}>
         <img
           className="h-100 mw-100"
-          src={restaurant.presentationImageUrl}
+          src={restaurant.imageUrl}
           alt={`restaurant ${restaurant.id} presentation`}
         />
       </div>
@@ -36,9 +36,11 @@ const RestaurantCard = ({ restaurant }: { restaurant: RestaurantType }) => {
             <ScoreComponent
               style={{ display: "flex", alignItems: "center" }}
               className="me-2"
-              score={restaurant.score}
+              score={restaurant.ratingAverage || 0}
             />
-            <span>{restaurant.score}</span>
+            <span>
+              {(Math.round(restaurant.ratingAverage * 10) / 10).toFixed(1)}
+            </span>
           </div>
           <span>{restaurant.name}</span>
         </div>
@@ -49,7 +51,10 @@ const RestaurantCard = ({ restaurant }: { restaurant: RestaurantType }) => {
           <IconProvider iconName="pin-map-fill" className="me-1" />
           <span>{restaurant.address}</span>
         </div>
-        <div className="mh-80" style={{ textAlign: "justify", overflow: 'hidden' }}>
+        <div
+          className="mh-80"
+          style={{ textAlign: "justify", overflow: "hidden" }}
+        >
           {restaurant.description}
         </div>
         <Link

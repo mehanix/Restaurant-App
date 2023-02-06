@@ -27,7 +27,6 @@ const handleSubmit = async ({
   }
   setIsLoading(true);
   const result = await login({ email, password });
-  console.log(result);
   if (result?.error) {
     toast.error("Invalid credentials!");
   } else {

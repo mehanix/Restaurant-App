@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Card } from "react-bootstrap";
 import { RestaurantType, ReviewType } from "../../../utils/types";
 import { ScoreComponent } from "../../../components/ScoreComponent";
 import ReviewCard from "./ReviewCard";
 
-const RestaurantReviews = ({ restaurant }: { restaurant: RestaurantType }) => {
+const RestaurantReviews = ({
+  restaurant,
+  reviews,
+}: {
+  restaurant: RestaurantType;
+  reviews: ReviewType[];
+}) => {
+  const restaurantRating = useMemo(
+    () =>
+      reviews
+        .map((review: ReviewType) => review.score)
+        .reduce((sum, score) => sum + score, 0),
+    [reviews]
+  );
+
   return (
     <div
       style={{
@@ -17,7 +31,7 @@ const RestaurantReviews = ({ restaurant }: { restaurant: RestaurantType }) => {
         <Card.Header
           style={{ display: "flex", justifyContent: "space-between" }}
         >
-          <span style={{fontWeight: 700, fontSize: '22px'}}>Reviews:</span>
+          <span style={{ fontWeight: 700, fontSize: "22px" }}>Reviews:</span>
           <div
             style={{ display: "inline-flex", alignItems: "center" }}
             className="badge wine"
@@ -25,13 +39,13 @@ const RestaurantReviews = ({ restaurant }: { restaurant: RestaurantType }) => {
             <ScoreComponent
               style={{ display: "flex", alignItems: "center" }}
               className="me-2"
-              score={restaurant.score}
+              score={restaurantRating}
             />
-            <span>{restaurant.score}</span>
+            <span>{restaurantRating}</span>
           </div>
         </Card.Header>
         <Card.Body style={{ overflowY: "scroll" }}>
-          {restaurant.reviews.map((review: ReviewType) => (
+          {reviews.map((review: ReviewType) => (
             <ReviewCard review={review} />
           ))}
         </Card.Body>
