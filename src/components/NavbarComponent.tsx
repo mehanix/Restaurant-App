@@ -15,6 +15,7 @@ const NavbarComponent = () => {
         <Navbar.Brand>Reserve&Eat</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href="/">Restaurants</Nav.Link>
+          <Nav.Link href="/reservations">Reservations</Nav.Link>
         </Nav>
         <Nav className="justify-content-end">
           <Navbar.Text>
