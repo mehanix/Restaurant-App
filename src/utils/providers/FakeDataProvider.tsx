@@ -1,5 +1,6 @@
-import React, { createContext, useMemo, useState } from "react";
+import React, { createContext, useMemo } from "react";
 import { faker } from "@faker-js/faker";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const FakeDataContext = createContext({});
 
@@ -14,7 +15,7 @@ export type FakeRestaurantDataDictType = {
 
 const FakeDataProvider = ({ children }: { children: any }) => {
   const [fakeRestaurantDataDict, setFakeRestaurantDataDict] =
-    useState<FakeRestaurantDataDictType>({});
+    useLocalStorage<FakeRestaurantDataDictType>("fakeData", {});
 
   const getFakeDataForRestaurantId = (
     restaurantId: number
@@ -25,8 +26,8 @@ const FakeDataProvider = ({ children }: { children: any }) => {
         description: faker.lorem.paragraphs() || "",
         imageUrl: faker.image.food(600, 400, true) || "",
       };
+      setFakeRestaurantDataDict(futureFakeRestaurantDataTict);
     }
-    setFakeRestaurantDataDict(futureFakeRestaurantDataTict);
     return futureFakeRestaurantDataTict[restaurantId];
   };
 

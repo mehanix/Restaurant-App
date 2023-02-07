@@ -7,6 +7,7 @@ export type RestaurantType = {
   imageUrl: string;
   ratingAverage: number;
   type: string;
+  feedbacks: FeedbackType[];
 };
 
 export const emptyRestaurant = {
@@ -18,24 +19,15 @@ export const emptyRestaurant = {
   imageUrl: "",
   ratingAverage: 0,
   type: "",
+  feedbacks: [],
 };
 
-export type ReviewType = {
+export type FeedbackType = {
   id: number;
   username: string;
-  postedOn: Date;
-  score: number;
+  // postedOn: Date;
+  rating: number;
   title: string;
-  message: string;
-  relevance: number;
-};
-
-export const emptyReview = {
-  id: 0,
-  username: "",
-  postedOn: new Date(),
-  score: 0,
-  title: "",
-  message: "",
-  relevance: 0,
+  comment: string;
+  feedbackVotesRating: number;
 };

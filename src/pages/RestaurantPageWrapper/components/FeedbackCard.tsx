@@ -1,9 +1,9 @@
 import React from "react";
 import IconProvider from "../../../assets/icons/IconProvider";
-import { ReviewType } from "../../../utils/types";
+import { FeedbackType } from "../../../utils/types";
 import { ScoreComponent } from "../../../components/ScoreComponent";
 
-const ReviewCard = ({ review }: { review: ReviewType }) => {
+const FeedbackCard = ({ feedback }: { feedback: FeedbackType }) => {
   return (
     <div
       style={{
@@ -14,22 +14,22 @@ const ReviewCard = ({ review }: { review: ReviewType }) => {
         marginBottom: "1rem",
       }}
     >
-      <span className="fw-bold">{review.username}</span>
-      <span className="fw-light">{" - " + review.postedOn.toString()}</span>
+      <span className="fw-bold">{feedback.username}</span>
+      {/* <span className="fw-light">{" - " + feedback.postedOn.toString()}</span> */}
       <ScoreComponent
         style={{ display: "flex", alignItems: "center" }}
         className="me-2"
-        score={review.score}
+        score={feedback.rating}
       />
-      <div className="fw-bold">{review.title}</div>
-      <div>{review.message}</div>
+      <div className="fw-bold">{feedback.title}</div>
+      <div>{feedback.comment}</div>
       <div className="pt-2" style={{ display: "flex", alignItems: "center" }}>
         <IconProvider iconName="hand-thumbs-up" />
-        <span className="px-2">{review.relevance}</span>
+        <span className="px-2">{feedback.feedbackVotesRating}</span>
         <IconProvider iconName="hand-thumbs-down" />
       </div>
     </div>
   );
 };
 
-export default ReviewCard;
+export default FeedbackCard;

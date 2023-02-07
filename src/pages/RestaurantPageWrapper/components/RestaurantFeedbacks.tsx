@@ -1,22 +1,21 @@
 import React, { useMemo } from "react";
 import { Card } from "react-bootstrap";
-import { RestaurantType, ReviewType } from "../../../utils/types";
+import { RestaurantType, FeedbackType } from "../../../utils/types";
 import { ScoreComponent } from "../../../components/ScoreComponent";
-import ReviewCard from "./ReviewCard";
+import FeedbackCard from "./FeedbackCard";
 
-const RestaurantReviews = ({
+const RestaurantFeedbacks = ({
   restaurant,
-  reviews,
 }: {
   restaurant: RestaurantType;
-  reviews: ReviewType[];
 }) => {
+  const restaurantFeedback = restaurant?.feedbacks || [];
   const restaurantRating = useMemo(
     () =>
-      reviews
-        .map((review: ReviewType) => review.score)
-        .reduce((sum, score) => sum + score, 0),
-    [reviews]
+      restaurantFeedback
+        .map((feedback: FeedbackType) => feedback.rating)
+        .reduce((sum, score) => sum + score, 0) / restaurantFeedback.length,
+    [restaurant]
   );
 
   return (
@@ -31,7 +30,7 @@ const RestaurantReviews = ({
         <Card.Header
           style={{ display: "flex", justifyContent: "space-between" }}
         >
-          <span style={{ fontWeight: 700, fontSize: "22px" }}>Reviews:</span>
+          <span style={{ fontWeight: 700, fontSize: "22px" }}>Feedbacks:</span>
           <div
             style={{ display: "inline-flex", alignItems: "center" }}
             className="badge wine"
@@ -41,12 +40,12 @@ const RestaurantReviews = ({
               className="me-2"
               score={restaurantRating}
             />
-            <span>{restaurantRating}</span>
+            {(Math.round(restaurantRating * 10) / 10).toFixed(1)}
           </div>
         </Card.Header>
         <Card.Body style={{ overflowY: "scroll" }}>
-          {reviews.map((review: ReviewType) => (
-            <ReviewCard review={review} />
+          {restaurantFeedback.map((feedback: FeedbackType) => (
+            <FeedbackCard feedback={feedback} />
           ))}
         </Card.Body>
       </Card>
@@ -54,4 +53,4 @@ const RestaurantReviews = ({
   );
 };
 
-export default RestaurantReviews;
+export default RestaurantFeedbacks;

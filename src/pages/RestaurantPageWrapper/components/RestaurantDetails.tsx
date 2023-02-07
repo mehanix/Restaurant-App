@@ -15,7 +15,7 @@ const RestaurantDetails = ({ restaurant }: { restaurant: RestaurantType }) => {
         }}
       >
         <img
-          style={{ position: "absolute", top: "-75%", width: "100%" }}
+          style={{ position: "absolute", width: "100%" }}
           src={restaurant.imageUrl}
           alt={`restaurant ${restaurant.id} presentation`}
         />
