@@ -9,9 +9,9 @@ import { RestaurantType } from "../../utils/types";
 import RestaurantList from "./components/RestaurantList";
 
 const getRestaurantsFromRequest = async ({
-  getFakeDataForRestaurantId,
+  getFakeDataForRestaurantsList,
 }: {
-  getFakeDataForRestaurantId: Function;
+  getFakeDataForRestaurantsList: Function;
 }) => {
   const result = await axios
     .get(`${API_URL}/restaurants`)
@@ -25,8 +25,9 @@ const getRestaurantsFromRequest = async ({
     return { error: true, data: null };
   }
   let restaurants = result.data;
+  let fakeDataDict = getFakeDataForRestaurantsList(restaurants)
   restaurants = restaurants.map((restaurant: RestaurantType) => {
-    let fakeRestaurantData = getFakeDataForRestaurantId(restaurant.id);
+    let fakeRestaurantData = fakeDataDict[restaurant.id];
     return { ...restaurant, ...fakeRestaurantData };
   });
   return { error: false, data: restaurants }; // it will be replaced by the response of the call
@@ -35,13 +36,13 @@ const getRestaurantsFromRequest = async ({
 const RestaurantListPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [restaurants, setRestaurants] = useState<RestaurantType[]>([]);
-  const { getFakeDataForRestaurantId } = useContext<any>(FakeDataContext);
+  const { getFakeDataForRestaurantsList } = useContext<any>(FakeDataContext);
 
   const getAndSetRequests = async () => {
     setIsLoading(true);
     toast.info("Getting things ready...", { autoClose: 2000 });
     const result = await getRestaurantsFromRequest({
-      getFakeDataForRestaurantId,
+      getFakeDataForRestaurantsList,
     });
     if (!Boolean(result?.error) && Array.isArray(result?.data)) {
       setRestaurants(result?.data);
