@@ -3,17 +3,31 @@ export type RestaurantType = {
   name: string;
   description: string;
   address: string;
-  presentationImageUrl: string;
-  score: number;
-  reviews: any[];
+  phone: string;
+  imageUrl: string;
+  ratingAverage: number;
+  type: string;
+  feedbacks: FeedbackType[];
 };
 
-export type ReviewType = {
+export const emptyRestaurant = {
+  id: 0,
+  name: "",
+  description: "",
+  address: "",
+  phone: "",
+  imageUrl: "",
+  ratingAverage: 0,
+  type: "",
+  feedbacks: [],
+};
+
+export type FeedbackType = {
   id: number;
   username: string;
-  postedOn: Date;
-  score: number;
+  // postedOn: Date;
+  rating: number;
   title: string;
-  message: string;
-  relevance: number;
+  comment: string;
+  feedbackVotesRating: number;
 };

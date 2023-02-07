@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/p5": "^1.5.0",
     "react-router-dom": "^6.5.0"
   }
