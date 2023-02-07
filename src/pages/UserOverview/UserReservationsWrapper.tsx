@@ -15,7 +15,7 @@ export const UserReservationsWrapper = () => {
 
   const getPastReservations = async () => {
     let res = await axios
-      .get(`http://localhost:8080/users/${1}/past-bookings`)
+      .get(`http://localhost:8080/users/${user.user.id}/past-bookings`)
       .catch();
 
     console.log(res.data);
@@ -24,7 +24,7 @@ export const UserReservationsWrapper = () => {
 
   const getFutureReservations = async () => {
     let res = await axios
-      .get(`http://localhost:8080/users/${1}/future-bookings`)
+      .get(`http://localhost:8080/users/${user.user.id}/future-bookings`)
       .catch();
 
     console.log(res.data);
