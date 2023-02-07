@@ -2,8 +2,8 @@ import { Heading } from "@chakra-ui/react";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { API_URL } from "../../api";
 import LoadingIndicator from "../../components/LoadingIndicator";
-import { emptyRestaurant } from "../../utils/dummyData";
 import { UserContext } from "../../utils/providers/UserContextProvider";
 import UserReservations from "./components/UserReservations";
 
@@ -11,11 +11,12 @@ export const UserReservationsWrapper = () => {
   const [pastReservations, setPastReservations] = useState([]);
   const [futureReservations, setFutureReservations] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const user = useContext(UserContext) as any;
+  const {user} = useContext<any>(UserContext)
+  const userId = user?.id || 0;
 
   const getPastReservations = async () => {
     let res = await axios
-      .get(`http://localhost:8080/users/${1}/past-bookings`)
+      .get(`${API_URL}/users/${userId}/past-bookings`)
       .catch();
 
     console.log(res.data);
@@ -24,7 +25,7 @@ export const UserReservationsWrapper = () => {
 
   const getFutureReservations = async () => {
     let res = await axios
-      .get(`http://localhost:8080/users/${1}/future-bookings`)
+      .get(`${API_URL}/users/${userId}/future-bookings`)
       .catch();
 
     console.log(res.data);
