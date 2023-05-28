@@ -1,8 +1,9 @@
-import { Button, Heading, HStack, Input, Select } from "@chakra-ui/react";
+import { Box, Button, Center, Container, Flex, Heading, HStack, Input, Select, Spacer } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../utils/providers/UserContextProvider";
 import { Minimap, reservationManager } from "./components/minimap/Minimap";
+import { FormControl } from "react-bootstrap";
 
 const Page = () => {
   const { id } = useParams();
@@ -13,15 +14,15 @@ const Page = () => {
   });
 
   return (
-    <>
+    <Container maxW="1000px"  >
       <input hidden id="restaurantId" value={id} />
 
       <input hidden id="userId" value={user.user.id} />
       <Heading mt="10px" size="xl">
         Make a reservation
       </Heading>
-      <HStack mt="10px">
-        <Input
+      <Flex mt="10px">
+        <Input mr="5px"
           onChange={() => {
             reservationManager.setActive(false);
           }}
@@ -31,7 +32,8 @@ const Page = () => {
           width="200px"
           id="reservationDate"
         />
-        <Select
+       
+        <Select mr="5px"
           onChange={() => {
             reservationManager.setActive(false);
           }}
@@ -53,6 +55,7 @@ const Page = () => {
           <option value="4">4</option>
           <option value="6">6</option>
         </Select>
+                <Spacer />
         <Button
           colorScheme="blue"
           onClick={() => {
@@ -61,9 +64,13 @@ const Page = () => {
         >
           Check availability
         </Button>
-      </HStack>
+      </Flex>
+      <Center padding="15pt">
       <Minimap />
-      <Button
+
+      </Center>
+          <Center>
+          <Button mb="10px"
         onClick={() => {
           reservationManager.submit();
         }}
@@ -72,7 +79,8 @@ const Page = () => {
       >
         Rezerva
       </Button>
-    </>
+          </Center>
+    </Container>
   );
 };
 

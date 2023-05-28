@@ -1,4 +1,4 @@
-import { Heading } from "@chakra-ui/react";
+import { Container, Heading } from "@chakra-ui/react";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -64,11 +64,11 @@ export const UserReservationsWrapper = () => {
   }
 
   return (
-    <>
-      <Heading mt="10px">My Past Reservations</Heading>
-      <UserReservations reservations={pastReservations ?? []} />;
-      <Heading mt="10px">My Future Reservations</Heading>
-      <UserReservations reservations={futureReservations ?? []} />;
-    </>
+    <Container maxW="1000pt" padding="10pt">
+      <Heading mt="10px" mb="10px">My Past Reservations</Heading>
+      <UserReservations reservations={pastReservations ?? []} />
+      <Heading mt="10px" mb="10px">My Future Reservations</Heading>
+      <UserReservations reservations={futureReservations ?? []} />
+    </Container>
   );
 };

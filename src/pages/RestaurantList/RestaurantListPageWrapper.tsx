@@ -46,13 +46,14 @@ const RestaurantListPage = () => {
     });
     if (!Boolean(result?.error) && Array.isArray(result?.data)) {
       setRestaurants(result?.data);
+      localStorage.setItem("resturants", JSON.stringify(result?.data));
       toast.success("Restaurants successfully loaded!");
     } else {
       toast.error("Seems like something broke!");
     }
     setIsLoading(false);
   };
-
+  
   useEffect(() => {
     getAndSetRequests();
   }, []);

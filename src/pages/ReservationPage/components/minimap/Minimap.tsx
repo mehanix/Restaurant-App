@@ -1,14 +1,13 @@
 import p5 from "p5";
 import { useEffect, useRef } from "react";
-import { TableObject } from "./APIInterfaces";
 import { ReservationDataManager } from "./ReservationDataManager";
-import { Table, TableStatus } from "./Table";
+import { Table, TableParams, TableStatus } from "./Table";
 import { TableManager } from "./TableManager";
 
 let myP5: p5;
 export let tableManager: TableManager;
 export let reservationManager: ReservationDataManager;
-const DemoTables: TableObject[] = [
+const DemoTables: TableParams[] = [
   {
     x: 50,
     y: 50,
@@ -53,7 +52,7 @@ const DemoTables: TableObject[] = [
   },
 ];
 
-const getTableMapFromRequest = async () => {
+export const getTableMapFromRequest = () => {
   // req la harta
   return DemoTables; // it will be replaced by the response of the call
 };
