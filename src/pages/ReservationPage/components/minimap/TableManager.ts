@@ -41,21 +41,21 @@ export class TableManager {
       return;
     }
 
-    TableManager.tables = getTableMapFromRequest().map((apiObject: TableParams) => {
-      return new Table(apiObject);
-    });
-
-    // TableManager.tables = res.data.map((apiObject: TableAPI) => {
-    //   return new Table({
-    //     x: apiObject.graphicX,
-    //     y: apiObject.graphicY,
-    //     id: apiObject.id,
-    //     numberOfSeats: apiObject.capacity,
-    //     status: apiObject.available
-    //       ? TableStatus.AVAILABLE
-    //       : TableStatus.UNAVAILABLE,
-    //   });
+    // TableManager.tables = getTableMapFromRequest().map((apiObject: TableParams) => {
+    //   return new Table(apiObject);
     // });
+
+    TableManager.tables = res.data.map((apiObject: TableAPI) => {
+      return new Table({
+        x: apiObject.graphicX,
+        y: apiObject.graphicY,
+        id: apiObject.id,
+        numberOfSeats: apiObject.capacity,
+        status: apiObject.available
+          ? TableStatus.AVAILABLE
+          : TableStatus.UNAVAILABLE,
+      });
+    });
   }
   displayTables() {
     for (let table of TableManager.tables) {

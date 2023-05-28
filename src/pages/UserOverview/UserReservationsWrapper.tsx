@@ -1,9 +1,8 @@
-import { Container, Heading } from "@chakra-ui/react";
+import { Center, Container, Divider, Heading, Spinner } from "@chakra-ui/react";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { API_URL } from "../../api";
-import LoadingIndicator from "../../components/LoadingIndicator";
 import { UserContext } from "../../utils/providers/UserContextProvider";
 import UserReservations from "./components/UserReservations";
 
@@ -34,12 +33,12 @@ export const UserReservationsWrapper = () => {
 
   const getAndSetRestaurantRequest = async () => {
     setIsLoading(true);
-    toast.info("Getting things ready...", { autoClose: 2000 });
+    // toast.info("Getting things ready...", { autoClose: 2000 });
     const result = await getPastReservations();
     if (result) {
       setPastReservations(result);
       console.log("rrr", pastReservations);
-      toast.success(" Past Reservations successfully loaded!");
+      // toast.success(" Past Reservations successfully loaded!");
     } else {
       toast.error("Seems like something broke!");
     }
@@ -47,7 +46,7 @@ export const UserReservationsWrapper = () => {
     const otherResult = await getFutureReservations();
     if (otherResult) {
       setFutureReservations(otherResult);
-      toast.success(" Future Reservations successfully loaded!");
+      // toast.success(" Future Reservations successfully loaded!");
     } else {
       toast.error("Seems like something broke!");
     }
@@ -60,13 +59,16 @@ export const UserReservationsWrapper = () => {
   }, []);
 
   if (isLoading) {
-    return <LoadingIndicator />;
+    return <Center pt="500">
+    <Spinner />
+          </Center>
   }
 
   return (
-    <Container maxW="1000pt" padding="10pt">
+    <Container maxW="1400px" padding="72px">
       <Heading mt="10px" mb="10px">My Past Reservations</Heading>
       <UserReservations reservations={pastReservations ?? []} />
+      <Divider/>
       <Heading mt="10px" mb="10px">My Future Reservations</Heading>
       <UserReservations reservations={futureReservations ?? []} />
     </Container>

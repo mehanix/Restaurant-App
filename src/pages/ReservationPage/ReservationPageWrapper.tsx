@@ -18,7 +18,7 @@ const Page = () => {
       <input hidden id="restaurantId" value={id} />
 
       <input hidden id="userId" value={user.user.id} />
-      <Heading mt="10px" size="xl">
+      <Heading mt="100px" size="xl">
         Make a reservation
       </Heading>
       <Flex mt="10px">

@@ -7,6 +7,9 @@ import PageTitle from "../../components/PageTitle";
 import { FakeDataContext } from "../../utils/providers/FakeDataProvider";
 import { RestaurantType } from "../../utils/types";
 import RestaurantList from "./components/RestaurantList";
+import { Center, ChakraBaseProvider, Spinner, extendBaseTheme } from '@chakra-ui/react'
+import chakraTheme from '@chakra-ui/theme'
+import { Container } from "react-bootstrap";
 
 const getRestaurantsFromRequest = async ({
   getFakeDataForRestaurantsList,
@@ -40,16 +43,16 @@ const RestaurantListPage = () => {
 
   const getAndSetRequests = async () => {
     setIsLoading(true);
-    toast.info("Getting things ready...", { autoClose: 2000 });
+    // toast.info("Getting things ready...", { autoClose: 2000 });
     const result = await getRestaurantsFromRequest({
       getFakeDataForRestaurantsList,
     });
     if (!Boolean(result?.error) && Array.isArray(result?.data)) {
       setRestaurants(result?.data);
       localStorage.setItem("resturants", JSON.stringify(result?.data));
-      toast.success("Restaurants successfully loaded!");
+      // toast.success("Restaurants successfully loaded!");
     } else {
-      toast.error("Seems like something broke!");
+      // toast.error("Seems like something broke!");
     }
     setIsLoading(false);
   };
@@ -59,19 +62,20 @@ const RestaurantListPage = () => {
   }, []);
 
   if (isLoading) {
-    return <LoadingIndicator />;
+    return <Center pt="500">
+    <Spinner />
+          </Center>
+   
   }
 
   return <RestaurantList restaurants={restaurants} />;
 };
 
 const RestaurantListPageWrapper = () => {
-  const pageTitle = "Restaurant List";
   return (
-    <>
-      <PageTitle pageTitle={pageTitle} />
-      <RestaurantListPage />
-    </>
+    <div  style={{paddingTop:"62px"}}>
+      <RestaurantListPage  />
+    </div>
   );
 };
 

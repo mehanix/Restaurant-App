@@ -21,27 +21,19 @@ const RestaurantFeedbacks = ({
   return (
     <div
       style={{
-        width: "40%",
-        height: "85vh",
-        padding: "1rem",
+        paddingLeft: "20rem", paddingRight: "20rem", marginTop: "20px"
       }}
     >
-      <Card style={{ width: "100%", height: "100%" }}>
+      <Card style={{ width: "100%" }}>
         <Card.Header
-          style={{ display: "flex", justifyContent: "space-between" }}
+          style={{ float: "right" }}
+        
         >
-          <span style={{ fontWeight: 700, fontSize: "22px" }}>Feedbacks:</span>
-          <div
-            style={{ display: "inline-flex", alignItems: "center" }}
-            className="badge wine"
-          >
-            <ScoreComponent
-              style={{ display: "flex", alignItems: "center" }}
-              className="me-2"
-              score={restaurantRating}
-            />
-            {(Math.round(restaurantRating * 10) / 10).toFixed(1)}
-          </div>
+          <ScoreComponent
+            style={{ display: "flex", alignItems: "center", float: "right" }}
+            className="me-2"
+            score={restaurantRating}
+          />
         </Card.Header>
         <Card.Body style={{ overflowY: "scroll" }}>
           {restaurantFeedback.map((feedback: FeedbackType) => (

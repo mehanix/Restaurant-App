@@ -11,6 +11,14 @@ const theme = extendTheme({
     heading: `'Poppins', sans-serif`,
     body: `'Poppins', sans-serif`,
   },
+  colors: {
+    primary: {
+      main: "#ED8936"
+    },
+    secondary: {
+      main: "#ED8936"
+    }
+  }
 })
 
 function App() {

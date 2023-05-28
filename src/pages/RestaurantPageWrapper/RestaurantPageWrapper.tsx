@@ -5,9 +5,11 @@ import { API_URL } from "../../api";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import PageTitle from "../../components/PageTitle";
 import { FakeDataContext } from "../../utils/providers/FakeDataProvider";
-import { emptyRestaurant, RestaurantType, FeedbackType } from "../../utils/types";
+import { emptyRestaurant, RestaurantType } from "../../utils/types";
 import RestaurantDetails from "./components/RestaurantDetails";
 import RestaurantFeedbacks from "./components/RestaurantFeedbacks";
+import { Center } from "@chakra-ui/layout";
+import { Spinner } from "react-bootstrap";
 
 const RestaurantPage = ({
   restaurant,
@@ -15,7 +17,7 @@ const RestaurantPage = ({
   restaurant: RestaurantType;
 }) => {
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", flexDirection:"column" }}>
       <RestaurantDetails restaurant={restaurant} />
       <RestaurantFeedbacks restaurant={restaurant} />
     </div>
@@ -64,16 +66,18 @@ const RestaurantPageWrapper = () => {
   }, []);
 
   if (!Boolean(restaurant.id) || isLoading) {
-    return <LoadingIndicator />;
+    return <Center pt="500">
+    <Spinner />
+          </Center>
   }
 
-  const pageTitle = `Restaurant ${restaurant?.name}`;
+  const pageTitle = `${restaurant?.name}`;
 
   return (
-    <>
+    <div style={{paddingTop:"30px"}}>
       <PageTitle pageTitle={pageTitle} />
       <RestaurantPage restaurant={restaurant} />
-    </>
+    </div>
   );
 };
 

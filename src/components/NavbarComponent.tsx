@@ -62,9 +62,13 @@ export default function NavbarComponent() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user, isLogged, logout } = useContext<any>(UserContext);
 
+  if (!isLogged) {
+    return <></>
+  };
+
   return (
-    <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} boxShadow='base' px={4}>
+    <div style={{position:'fixed', width:"100%", backgroundColor:"white", top:0, zIndex:100}}>
+      <Box boxShadow='base' px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
@@ -86,7 +90,7 @@ export default function NavbarComponent() {
     rounded={'md'}
     _hover={{
       textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700'),
+      bg: 'gray.200',
       textColor: "orange.500"
 
     }}
@@ -99,7 +103,7 @@ export default function NavbarComponent() {
     rounded={'md'}
     _hover={{
       textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700'),
+      bg: 'gray.200',
       textColor: "orange.500"
     }}
     to={'/reservations'}>
@@ -159,6 +163,6 @@ export default function NavbarComponent() {
         ) : null}
       </Box>
 
-    </>
+    </div>
   );
 }
