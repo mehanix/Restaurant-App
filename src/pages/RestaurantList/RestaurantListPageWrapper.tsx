@@ -7,6 +7,8 @@ import PageTitle from "../../components/PageTitle";
 import { FakeDataContext } from "../../utils/providers/FakeDataProvider";
 import { RestaurantType } from "../../utils/types";
 import RestaurantList from "./components/RestaurantList";
+import { ChakraBaseProvider, extendBaseTheme } from '@chakra-ui/react'
+import chakraTheme from '@chakra-ui/theme'
 
 const getRestaurantsFromRequest = async ({
   getFakeDataForRestaurantsList,
@@ -65,10 +67,8 @@ const RestaurantListPage = () => {
 };
 
 const RestaurantListPageWrapper = () => {
-  const pageTitle = "Restaurant List";
   return (
     <>
-      <PageTitle pageTitle={pageTitle} />
       <RestaurantListPage />
     </>
   );

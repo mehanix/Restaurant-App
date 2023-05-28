@@ -4,15 +4,18 @@ const PageTitle = ({ pageTitle }: { pageTitle: string }) => {
   return (
     <div
       style={{
-        height: "3rem",
-        width: "100%",
-        display: "flex",
+        height: "8rem",
+        width: "60%",
         alignItems: "center",
-        paddingLeft: "2rem",
-        boxShadow: "0px 15px 10px -15px #111",
+        textAlign:"center",
+        paddingTop:"30px",
+        marginLeft: "20%",
+        marginRight:"20%",
+        marginTop:"30px",
+        borderRadius:"10px"
       }}
     >
-      <span style={{ fontSize: "20px", fontWeight: "bold" }}>{pageTitle}</span>
+      <span style={{ fontSize: "40px", fontWeight: "bold"}}>{pageTitle}</span>
     </div>
   );
 };
