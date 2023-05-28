@@ -15,7 +15,7 @@ const RestaurantPage = ({
   restaurant: RestaurantType;
 }) => {
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", flexDirection:"column" }}>
       <RestaurantDetails restaurant={restaurant} />
       <RestaurantFeedbacks restaurant={restaurant} />
     </div>
@@ -67,7 +67,7 @@ const RestaurantPageWrapper = () => {
     return <LoadingIndicator />;
   }
 
-  const pageTitle = `Restaurant ${restaurant?.name}`;
+  const pageTitle = `${restaurant?.name}`;
 
   return (
     <>
